@@ -111,7 +111,9 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
     document.getElementById('exportBtn').addEventListener('click', exportToJsonFile);
     document.getElementById('importFile').addEventListener('change', importFromJsonFile);
+
+    // Create the add quote form dynamically
+    createAddQuoteForm();
 });
