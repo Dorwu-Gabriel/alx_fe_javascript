@@ -99,7 +99,7 @@ function importFromJsonFile(event) {
 }
 
 // --- Initialization ---
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', function() {
     loadQuotes();
 
     // Restore last viewed quote if available
@@ -110,8 +110,8 @@ window.onload = function() {
         showRandomQuote();
     }
 
-    document.getElementById('newQuote').onclick = showRandomQuote;
-    document.getElementById('addQuoteBtn').onclick = addQuote;
-    document.getElementById('exportBtn').onclick = exportToJsonFile;
-    document.getElementById('importFile').onchange = importFromJsonFile;
-};
+    document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
+    document.getElementById('exportBtn').addEventListener('click', exportToJsonFile);
+    document.getElementById('importFile').addEventListener('change', importFromJsonFile);
+});
