@@ -258,6 +258,7 @@ async function syncWithServer() {
 // Sync quotes manually (can be called from UI or elsewhere)
 async function syncQuotes() {
     await syncWithServer();
+    showSyncNotification('Quotes synced with server!');
 }
 
 // Manual conflict resolution (optional, for demo)
