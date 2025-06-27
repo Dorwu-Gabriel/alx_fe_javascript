@@ -107,13 +107,15 @@ function importFromJsonFile(event) {
 }
 
 // --- Category Filtering ---
+let selectedCategory = "all"; // Track the currently selected category
+
 function populateCategories() {
     const categoryFilter = document.getElementById('categoryFilter');
     if (!categoryFilter) return;
     // Get unique categories
     const categories = [...new Set(quotes.map(q => q.category))];
     // Save current selection
-    const currentValue = categoryFilter.value;
+    const currentValue = categoryFilter.value || selectedCategory;
     // Remove all except "All Categories"
     categoryFilter.innerHTML = `<option value="all">All Categories</option>`;
     categories.forEach(cat => {
@@ -125,14 +127,17 @@ function populateCategories() {
     // Restore selection if possible
     if (categories.includes(currentValue)) {
         categoryFilter.value = currentValue;
+        selectedCategory = currentValue;
     } else {
         categoryFilter.value = "all";
+        selectedCategory = "all";
     }
 }
 
 // Filter quotes based on selected category
 function filterQuotes() {
     const category = document.getElementById('categoryFilter').value;
+    selectedCategory = category; // Update the selected category
     localStorage.setItem(CATEGORY_FILTER_KEY, category);
     let filteredQuotes = quotes;
     if (category !== "all") {
