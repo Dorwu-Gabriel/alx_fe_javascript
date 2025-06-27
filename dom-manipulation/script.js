@@ -153,6 +153,26 @@ function filterQuotes() {
     saveLastQuoteIndex(quotes.indexOf(quote));
 }
 
+// --- Dynamically create the Add Quote Form (if needed) ---
+function createAddQuoteForm() {
+    // Prevent duplicate form
+    if (document.getElementById('addQuoteForm')) return;
+
+    const form = document.createElement('div');
+    form.id = 'addQuoteForm';
+    form.innerHTML = `
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteBtn">Add Quote</button>
+    `;
+    // Insert after quoteDisplay
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    quoteDisplay.parentNode.insertBefore(form, quoteDisplay.nextSibling);
+
+    // Attach event listener
+    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
+}
+
 // --- Initialization ---
 window.addEventListener('DOMContentLoaded', function() {
     loadQuotes();
