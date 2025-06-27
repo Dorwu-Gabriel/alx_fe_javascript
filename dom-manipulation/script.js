@@ -255,6 +255,11 @@ async function syncWithServer() {
     }
 }
 
+// Sync quotes manually (can be called from UI or elsewhere)
+async function syncQuotes() {
+    await syncWithServer();
+}
+
 // Manual conflict resolution (optional, for demo)
 function manualResolveConflicts() {
     fetchQuotesFromServer().then(serverQuotes => {
