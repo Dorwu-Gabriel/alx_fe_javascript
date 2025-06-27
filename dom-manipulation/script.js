@@ -57,17 +57,15 @@ function addQuote() {
         alert('Please enter both quote and category.');
         return;
     }
-    quotes.push({ text, category });
+    const newQuote = { text, category };
+    quotes.push(newQuote);
     saveQuotes();
     document.getElementById('newQuoteText').value = '';
     document.getElementById('newQuoteCategory').value = '';
     populateCategories();
-    // If the new quote's category matches the filter, show it; else, re-filter
-    if (document.getElementById('categoryFilter').value === category || document.getElementById('categoryFilter').value === "all") {
-        filterQuotes();
-    } else {
-        filterQuotes();
-    }
+    filterQuotes();
+    // Post to server (simulated)
+    postQuoteToServer(newQuote);
 }
 
 // --- JSON Export ---
@@ -283,6 +281,25 @@ function addConflictResolutionButton() {
     btn.onclick = manualResolveConflicts;
     const container = document.querySelector('.centered-buttons') || document.body;
     container.appendChild(btn);
+}
+
+// Simulate posting a new quote to the server (for demo, just POST to JSONPlaceholder)
+async function postQuoteToServer(quote) {
+    try {
+        const response = await fetch(SERVER_API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(quote)
+        });
+        // Optionally handle response
+        if (response.ok) {
+            showSyncNotification('Quote sent to server (simulated).');
+        }
+    } catch (error) {
+        console.error('Failed to post quote to server:', error);
+    }
 }
 
 // --- Initialization ---
